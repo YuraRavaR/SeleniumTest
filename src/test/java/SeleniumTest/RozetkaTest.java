@@ -25,6 +25,7 @@ public class RozetkaTest {
         WebElement searchBar = driver.findElement(By.xpath("//input[@name='search']"));
         searchBar.click();
         searchBar.sendKeys("iphone 13", Keys.ENTER);
+        searchBar.getRect();
 
     }
 
