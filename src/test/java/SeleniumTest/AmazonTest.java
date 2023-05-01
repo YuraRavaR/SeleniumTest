@@ -1,5 +1,6 @@
 package SeleniumTest;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -10,14 +11,12 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 
-
 public class AmazonTest {
     protected WebDriver driver;
 
     @BeforeTest
     public void setup() {
-        System.setProperty("webdriver.chrome.driver",
-                "C:\\Users\\Yura Kochubailo.000\\Desktop\\Selenium WebDriver\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
@@ -25,7 +24,7 @@ public class AmazonTest {
     }
 
     @Test
-    public void VerifyNavigationToWomensWalkingShoes()  {
+    public void VerifyNavigationToWomensWalkingShoes() {
         driver.get("http:\\amazon.com");
         WebElement searchBox = driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']"));
         searchBox.sendKeys("Shoes", Keys.ENTER);
@@ -33,10 +32,7 @@ public class AmazonTest {
         WebElement womensWalkingShoesCategory = driver.findElement(By.xpath("//span[@class='a-list-item']//span[contains(text(), \"Women's Walking Shoes\")]"));
         womensWalkingShoesCategory.click();
 
-//        String c =womensWalkingShoesCategory.getAttribute("class");
-//        Assert.assertTrue(c.contains("bold"));
-
-          Assert.assertTrue(driver.findElement(By.xpath("//span[@class= 'a-size-base a-color-base a-text-bold']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//span[@class= 'a-size-base a-color-base a-text-bold']")).isDisplayed());
 
 
     }
